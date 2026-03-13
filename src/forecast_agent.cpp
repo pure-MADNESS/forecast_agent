@@ -20,6 +20,7 @@
 // other includes as needed here
 #include "forecast.hpp"
 #include <iostream>
+#include <chrono>
 
 
 
@@ -28,7 +29,7 @@
 #define PLUGIN_NAME "forecast_agent"
 #endif
 
-#define PERIOD 0.001
+#define PERIOD 0.001  
 
 // Load the namespaces
 using namespace std;
@@ -59,14 +60,30 @@ public:
     // This sets the agent_id field in the output json object, only when it is
     // not empty
 
-     _weather = fetchWeather(46.0691, 11.1212, 1);
+    auto now = std::chrono::steady_clock::now();
+    auto dt  = std::chrono::duration_cast<std::chrono::seconds>(now - _last_update).count();
+
+    try {
+      if (dt > _update_interval_sec || !_valid_weather) {  // es. aggiorna ogni 60 s
+        _weather = fetchWeather(46.0691, 11.1212, 1);
+        _last_update = now;
+        _valid_weather = true;
+      }
+    } catch (const std::exception &e) {
+      // logga l’errore e continua usando l’ultimo valore valido
+      std::cerr << "fetchWeather error: " << e.what() << std::endl;
+    }
+
+    if (_valid_weather) {
       out["wind"] = _weather.wind_speed_10m;
       out["temperature"] = _weather.temperature_2m;
       out["cloud_cover"] = _weather.cloud_cover;
       out["precipitation"] = _weather.precipitation;
       out["direct_normal_irradiance"] = _weather.direct_normal_irradiance;
+    }
 
-
+    if (!_agent_id.empty()) out["agent_id"] = _agent_id;
+    return return_type::success;
       if (!_agent_id.empty()) out["agent_id"] = _agent_id;
     return return_type::success;
   }
@@ -99,7 +116,10 @@ public:
 private:
   // Define the fields that are used to store internal resources
   WeatherData _weather;
-  
+  std::chrono::steady_clock::time_point _last_update;
+  bool _valid_weather = false;
+  int _update_interval_sec = 600;  // configurabile da set_params
+
 };
 
 
