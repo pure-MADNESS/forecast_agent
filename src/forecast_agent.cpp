@@ -80,6 +80,7 @@ public:
       out["cloud_cover"] = _weather.cloud_cover;
       out["precipitation"] = _weather.precipitation;
       out["direct_normal_irradiance"] = _weather.direct_normal_irradiance;
+      out["estimated_flow_m3s"] = _weather.estimated_flow_m3s;
     }
 
     if (!_agent_id.empty()) out["agent_id"] = _agent_id;
