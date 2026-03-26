@@ -55,7 +55,14 @@ public:
       tm* local_tm = std::localtime(&now_time_t);
       int current_hour = local_tm->tm_hour;
 
-      _wind = input.at("wind").at(current_hour).get<double>() * 3.6;
+        int size = flows.size();
+
+        int idx_now = current_hour % size;
+        int idx_next = (current_hour + 1) % size;
+
+
+      _wind = input.at(idx_now).get<double>();
+      cout << "Wind now: " << _wind << "\t";
     }
     
     return return_type::success;
