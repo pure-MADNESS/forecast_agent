@@ -12,6 +12,7 @@
 # NOTICE: MADS Version 2.0.0
 cmake_minimum_required(VERSION 3.28)
 project(forecast_agent VERSION 2.0.0 LANGUAGES CXX)
+project(test_filter VERSION 2.0.0 LANGUAGES CXX)
 if(CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
 endif()
@@ -129,6 +130,7 @@ include_directories(${json_SOURCE_DIR}/include)
 
 # These plugins are always build and use for testing
 add_plugin(forecast_agent LIBS forecast)
+add_plugin(test_filter)
 
 
 # INSTALL ######################################################################
