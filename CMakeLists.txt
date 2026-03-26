@@ -51,10 +51,8 @@ FetchContent_Declare(pugg
 set(BUILD_TESTING OFF CACHE INTERNAL "")
 set(JSON_BuildTests OFF CACHE INTERNAL "")
 FetchContent_Declare(json
-  GIT_REPOSITORY https://github.com/nlohmann/json.git
-  GIT_TAG        v3.11.3
-  GIT_SHALLOW    TRUE
-  EXCLUDE_FROM_ALL
+  URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 
