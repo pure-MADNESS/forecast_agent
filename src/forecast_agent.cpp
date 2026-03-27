@@ -86,7 +86,7 @@ public:
       out["precipitation"] = _weather.precipitation;
       out["direct_normal_irradiance"] = _weather.direct_normal_irradiance;
       out["estimated_flow_m3s"] = _weather.estimated_flow_m3s;
-      out ["actual_wind"] = _weather.wind_speed_10m[current_hour];
+      out["fmu_input"]["actual_wind"] = _weather.wind_speed_10m[current_hour];
     }
 
     if (!_agent_id.empty()) out["agent_id"] = _agent_id;
