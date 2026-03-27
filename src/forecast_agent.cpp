@@ -66,7 +66,7 @@ public:
 
     auto now_time_t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
       tm* local_tm = std::localtime(&now_time_t);
-      int current_hour = local_tm->tm_hour;
+      int current_hour = local_tm->tm_hour - 1;
 
     try {
       if (dt > _update_interval_sec || !_valid_weather) {  // es. aggiorna ogni 60 s
@@ -86,7 +86,7 @@ public:
       out["precipitation"] = _weather.precipitation;
       out["direct_normal_irradiance"] = _weather.direct_normal_irradiance;
       out["estimated_flow_m3s"] = _weather.estimated_flow_m3s;
-      out["fmu_input"]["actual_wind"] = _weather.wind_speed_10m[current_hour];
+      out["fmu_input"]["actual_wind"] = _weather.wind_speed_10m[current_hour] / 3.6;
     }
 
     if (!_agent_id.empty()) out["agent_id"] = _agent_id;
