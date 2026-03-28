@@ -48,7 +48,6 @@ public:
   // return_type::critical: execution stops
   return_type load_data(json const &input, string topic = "", vector<unsigned char> const *blob = nullptr) override {
     // Do something with the input data
-    
     if(topic == "forecast"){
 
       auto now_time_t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
@@ -74,7 +73,7 @@ public:
 
     // load the data as necessary and set the fields of the json out variable
     cout << "Wind: [ " << _wind << "]" << endl; 
-
+    out["wind"] = _wind; // out can't be empty
     // This sets the agent_id field in the output json object, only when it is
     // not empty
     if (!_agent_id.empty()) out["agent_id"] = _agent_id;
