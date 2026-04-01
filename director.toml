@@ -1,0 +1,97 @@
+# director example configuration
+# Notes:
+# - [director] is optional global settings.
+# - Each top-level section name is the process name (mandatory).
+# - All options are shown below with defaults and purpose.
+
+[director] # optional: global director settings
+terminal = "" # optional, default="": terminal executable for detached attach windows
+sample_rate = 2.0 # optional, default=2.0: process metrics sampling period in seconds (fractions allowed)
+
+[broker] # process section name (mandatory)
+command = "mads broker" # mandatory: command line to execute
+# command supports variables: ${PWD}=resolved workdir, ${ID}=instance index (0-based)
+after = "" # optional, default="": start after this process name
+workdir = "" # optional, default="": working directory (uses director working directory)
+enabled = true # optional, default=true: when false, skip auto-start (manual start still allowed)
+scale = 1 # optional, default=1: number of instances to launch
+relaunch = false # optional, default=false: restart on non-zero exit status
+tty = false # optional, default=false: enable TTY/attach interaction
+# if workdir/.venv exists, director exposes it to launched Python commands
+
+[feedback]
+command = "mads feedback"
+after = "broker"
+enabled = false
+
+[forecast_agent] # process section name (mandatory)
+command = "mads source build/forecast_agent -p 1000"
+after = "broker" # optional, default="": dependency by process name
+enabled = true
+tty = false
+
+[wind_agent_1]
+command = "mads filter build/wind_agent.plugin -n wind_agent_1"
+workdir = "./../wind_agent"
+enabled = true
+tty = true
+after = "broker"
+
+[wind_agent_2]
+command = "mads filter build/wind_agent.plugin -n wind_agent_2"
+workdir = "./../wind_agent"
+enabled = true
+tty = true
+after = "broker"
+
+[wind_agent_3]
+command = "mads filter build/wind_agent.plugin -n wind_agent_3"
+workdir = "./../wind_agent"
+enabled = true
+tty = true
+after = "broker"
+
+[hydro_agent_1]
+command = "mads filter build/hydro_agent.plugin -n hydro_agent_1"
+workdir = "./../hydro_agent"
+enabled = true
+tty = true
+after = "broker"
+
+[load_agent_1]
+terminal = "gnome-terminal"
+command = "mads filter build/load_agent.plugin -n load_agent_1"
+workdir = "./../load_agent"
+enabled = false
+tty = false
+after = "broker"
+
+[load_agent_2]
+terminal = "kitty"
+command = "mads filter build/load_agent.plugin -n load_agent_2"
+workdir = "./../load_agent"
+enabled = false
+tty = true
+after = "broker"
+
+[load_agent_3]
+command = "mads filter build/load_agent.plugin -n load_agent_3"
+workdir = "./../load_agent"
+enabled = false
+tty = true
+after = "broker"
+
+[fmu_wind_turbine]
+command = "./build/src/main/mads-fmu models/wind_turbine.fmu"
+workdir = "./../FMU_agent"
+tty = false
+enabled = true
+after = "broker"
+
+[fmu_hydro_plant]
+command = "./build/src/main/mads-fmu models/hydro_plant.fmu"
+workdir = "./../FMU_agent"
+tty = false
+enabled = true
+after = "broker"
+
