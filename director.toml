@@ -58,6 +58,13 @@ enabled = true
 tty = true
 after = "broker"
 
+[solar_agent_1]
+command = "mads filter build/solar_agent.plugin -n solar_agent_1"
+workdir = "./../solar_agent/"
+enabled = true
+tty = true
+after = "broker"
+
 [load_agent_1]
 terminal = "gnome-terminal"
 command = "mads filter build/load_agent.plugin -n load_agent_1"
@@ -95,3 +102,10 @@ tty = false
 enabled = true
 after = "broker"
 
+
+[fmu_solar_plant]
+command = "./build/src/main/mads-fmu models/solar_plant.fmu"
+workdir = "./../FMU_agent"
+tty = false
+enabled = true
+after = "broker"
