@@ -37,19 +37,19 @@ enabled = true
 tty = true
 after = "broker"
 
-[wind_agent_2]
-command = "mads filter build/wind_agent.plugin -n wind_agent_2"
-workdir = "./../wind_agent"
-enabled = true
-tty = true
-after = "broker"
+# [wind_agent_2]
+# command = "mads filter build/wind_agent.plugin -n wind_agent_2"
+# workdir = "./../wind_agent"
+# enabled = true
+# tty = true
+# after = "broker"
 
-[wind_agent_3]
-command = "mads filter build/wind_agent.plugin -n wind_agent_3"
-workdir = "./../wind_agent"
-enabled = true
-tty = true
-after = "broker"
+# [wind_agent_3]
+# command = "mads filter build/wind_agent.plugin -n wind_agent_3"
+# workdir = "./../wind_agent"
+# enabled = true
+# tty = true
+# after = "broker"
 
 [hydro_agent_1]
 command = "mads filter build/hydro_agent.plugin -n hydro_agent_1"
@@ -61,7 +61,7 @@ after = "broker"
 [solar_agent_1]
 command = "mads filter build/solar_agent.plugin -n solar_agent_1"
 workdir = "./../solar_agent/"
-enabled = true
+enabled = false
 tty = true
 after = "broker"
 
@@ -88,11 +88,18 @@ enabled = false
 tty = true
 after = "broker"
 
+[accumulator_1]
+command = "mads filter build/accumulator_agent.plugin -n accumulator_1"
+workdir = "./../accumulator_agent"
+enabled = false
+tty = true
+after = "broker"
+
 [fmu_wind_turbine]
 command = "./build/src/main/mads-fmu models/wind_turbine.fmu"
 workdir = "./../FMU_agent"
-tty = false
-enabled = true
+tty = true
+enabled = false
 after = "broker"
 
 [fmu_hydro_plant]
@@ -101,7 +108,6 @@ workdir = "./../FMU_agent"
 tty = false
 enabled = true
 after = "broker"
-
 
 [fmu_solar_plant]
 command = "./build/src/main/mads-fmu models/solar_plant.fmu"
