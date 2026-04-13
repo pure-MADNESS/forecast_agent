@@ -37,12 +37,12 @@ enabled = true
 tty = true
 after = "broker"
 
-# [wind_agent_2]
-# command = "mads filter build/wind_agent.plugin -n wind_agent_2"
-# workdir = "./../wind_agent"
-# enabled = true
-# tty = true
-# after = "broker"
+[wind_agent_2]
+command = "mads filter build/wind_agent.plugin -n wind_agent_2"
+workdir = "./../wind_agent"
+enabled = false
+tty = true
+after = "broker"
 
 # [wind_agent_3]
 # command = "mads filter build/wind_agent.plugin -n wind_agent_3"
