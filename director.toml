@@ -61,7 +61,7 @@ after = "broker"
 [solar_agent_1]
 command = "mads filter build/solar_agent.plugin -n solar_agent_1"
 workdir = "./../solar_agent/"
-enabled = false
+enabled = true
 tty = true
 after = "broker"
 
