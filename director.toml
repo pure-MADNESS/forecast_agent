@@ -98,8 +98,8 @@ after = "broker"
 [fmu_wind_turbine]
 command = "./build/src/main/mads-fmu models/wind_turbine.fmu"
 workdir = "./../FMU_agent"
-tty = true
-enabled = false
+tty = false
+enabled = true
 after = "broker"
 
 [fmu_hydro_plant]
