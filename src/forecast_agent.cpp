@@ -66,7 +66,7 @@ public:
 
     auto now_time_t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
       tm* local_tm = std::localtime(&now_time_t);
-      int current_hour = local_tm->tm_hour - 1;
+      int current_hour = local_tm->tm_hour;
 
     try {
       if (dt > _update_interval_sec || !_valid_weather) {  // es. aggiorna ogni 60 s
