@@ -47,7 +47,7 @@ after = "broker"
 # [wind_agent_3]
 # command = "mads filter build/wind_agent.plugin -n wind_agent_3"
 # workdir = "./../wind_agent"
-# enabled = true
+# enabled = false
 # tty = true
 # after = "broker"
 
@@ -62,29 +62,6 @@ after = "broker"
 command = "mads filter build/solar_agent.plugin -n solar_agent_1"
 workdir = "./../solar_agent/"
 enabled = true
-tty = true
-after = "broker"
-
-[load_agent_1]
-terminal = "gnome-terminal"
-command = "mads filter build/load_agent.plugin -n load_agent_1"
-workdir = "./../load_agent"
-enabled = false
-tty = false
-after = "broker"
-
-[load_agent_2]
-terminal = "kitty"
-command = "mads filter build/load_agent.plugin -n load_agent_2"
-workdir = "./../load_agent"
-enabled = false
-tty = true
-after = "broker"
-
-[load_agent_3]
-command = "mads filter build/load_agent.plugin -n load_agent_3"
-workdir = "./../load_agent"
-enabled = false
 tty = true
 after = "broker"
 
