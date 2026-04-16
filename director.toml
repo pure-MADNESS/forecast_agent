@@ -30,6 +30,11 @@ after = "broker" # optional, default="": dependency by process name
 enabled = true
 tty = false
 
+[logger]
+command = "mads logger"
+after = "broker"
+enabled = false
+
 [wind_agent_1]
 command = "mads filter build/wind_agent.plugin -n wind_agent_1"
 workdir = "./../wind_agent"
