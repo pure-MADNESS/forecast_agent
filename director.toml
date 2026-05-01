@@ -34,6 +34,7 @@ tty = false
 command = "mads logger"
 after = "broker"
 enabled = false
+relaunch = true
 
 [wind_agent_1]
 command = "mads filter build/wind_agent.plugin -n wind_agent_1"
@@ -93,6 +94,13 @@ after = "broker"
 
 [fmu_solar_plant]
 command = "./build/src/main/mads-fmu models/solar_plant.fmu"
+workdir = "./../FMU_agent"
+tty = false
+enabled = true
+after = "broker"
+
+[fmu_accumulator]
+command = "./build/src/main/mads-fmu models/accumulator.fmu"
 workdir = "./../FMU_agent"
 tty = false
 enabled = true
